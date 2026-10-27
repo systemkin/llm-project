@@ -62,7 +62,7 @@ def extract_chunk(chunk: Chunk, llm: LLMClient) -> ExtractionResult:
         {"role": "user", "content": f"Текст чанка:\n{chunk.text}"},
     ]
 
-    for attempt in range(2):
+    for _attempt in range(2):
         response = llm.chat(messages, json_schema=EXTRACTION_SCHEMA, max_tokens=2048)
         data = _parse_response(response.content)
         if data is not None:
