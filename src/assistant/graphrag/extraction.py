@@ -39,6 +39,11 @@ _SYSTEM = (
     '"object_type":"Part","object":"P-1042B"}]}\n\n'
 )
 
+_RETRY_HINT = (
+    "Предыдущий ответ не удалось разобрать как JSON по схеме. "
+    "Верни только JSON-объект с полями entities и relations, без пояснений и без markdown-обёртки."
+)
+
 
 def extract_chunk(chunk: Chunk, llm: LLMClient) -> ExtractionResult:
     """Возвращает сущности и связи чанка строго по схеме графа.
@@ -46,10 +51,10 @@ def extract_chunk(chunk: Chunk, llm: LLMClient) -> ExtractionResult:
     Модель вызывается через ``llm.chat(..., json_schema=EXTRACTION_SCHEMA)``.
     Всё, что не подтверждается текстом чанка и словарём, отбрасывается и
     считается в ``dropped``. При неразбираемом ответе делается одна повторная
-    попытка, затем возвращается пустой результат.
+    попытка с изменённым запросом, затем возвращается пустой результат.
     """
     vocab = vocabulary()
-    messages = [
+    messages: list[dict] = [
         {
             "role": "system",
             "content": _SYSTEM + "Словарь названий:\n" + json.dumps(vocab, ensure_ascii=False),
@@ -57,11 +62,16 @@ def extract_chunk(chunk: Chunk, llm: LLMClient) -> ExtractionResult:
         {"role": "user", "content": f"Текст чанка:\n{chunk.text}"},
     ]
 
-    for _ in range(2):
+    for attempt in range(2):
         response = llm.chat(messages, json_schema=EXTRACTION_SCHEMA, max_tokens=2048)
         data = _parse_response(response.content)
         if data is not None:
             return _build_result(chunk, data, vocab)
+
+        messages = messages + [
+            {"role": "assistant", "content": response.content or ""},
+            {"role": "user", "content": _RETRY_HINT},
+        ]
 
     return ExtractionResult(chunk.chunk_id, chunk.doc_id)
 
@@ -99,6 +109,18 @@ def _build_result(
     text_lower = chunk.text.lower()
     dropped = 0
 
+    def confirm(entity_type: str, raw_name: str) -> Entity | None:
+        """Канонизирует сущность и проверяет её по тексту чанка и словарю."""
+        canonical = canonical_name(entity_type, raw_name, vocab)
+        if canonical is None:
+            return None
+        if entity_type in CODE_TYPES:
+            if canonical not in codes_in_chunk:
+                return None
+        elif canonical.lower() not in text_lower:
+            return None
+        return Entity(entity_type, canonical)
+
     entities: dict[str, Entity] = {}
 
     for raw in data.get("entities", []):
@@ -111,20 +133,10 @@ def _build_result(
             dropped += 1
             continue
 
-        canonical = canonical_name(entity_type, name, vocab)
-        if canonical is None:
+        entity = confirm(entity_type, name)
+        if entity is None:
             dropped += 1
             continue
-
-        if entity_type in CODE_TYPES:
-            confirmed = canonical in codes_in_chunk
-        else:
-            confirmed = canonical.lower() in text_lower
-        if not confirmed:
-            dropped += 1
-            continue
-
-        entity = Entity(entity_type, canonical)
         entities.setdefault(entity.node_id, entity)
 
     relations: list[Relation] = []
@@ -148,19 +160,9 @@ def _build_result(
             dropped += 1
             continue
 
-        subject = canonical_name(subject_type, subject_name, vocab)
-        obj = canonical_name(object_type, object_name, vocab)
-        if subject is None or obj is None:
-            dropped += 1
-            continue
-
-        subject_entity = Entity(subject_type, subject)
-        object_entity = Entity(object_type, obj)
-
-        if (
-            subject_entity.node_id not in entities
-            or object_entity.node_id not in entities
-        ):
+        subject_entity = confirm(subject_type, subject_name)
+        object_entity = confirm(object_type, object_name)
+        if subject_entity is None or object_entity is None:
             dropped += 1
             continue
 
@@ -170,9 +172,13 @@ def _build_result(
             continue
 
         key = (relation.subject.node_id, relation.type, relation.object.node_id)
-        if key not in seen_relations:
-            seen_relations.add(key)
-            relations.append(relation)
+        if key in seen_relations:
+            continue
+        seen_relations.add(key)
+        relations.append(relation)
+
+        entities.setdefault(subject_entity.node_id, subject_entity)
+        entities.setdefault(object_entity.node_id, object_entity)
 
     return ExtractionResult(
         chunk_id=chunk.chunk_id,
