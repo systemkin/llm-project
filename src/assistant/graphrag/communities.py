@@ -80,9 +80,9 @@ def summarize_community(community: Community, graph: nx.DiGraph, llm: LLMClient)
 
     facts = {
         "узлов": len(nodes),
-        "узлы_по_типам": by_type,
+        "узлы_по_типам": dict(sorted(by_type.items())),
         "связей": len(weighted_edges),
-        "связи_по_типам": by_relation,
+        "связи_по_типам": dict(sorted(by_relation.items())),
         "самые_тяжёлые_связи": [
             {"субъект": label(s), "связь": r, "объект": label(o), "вес": w}
             for w, s, o, r in weighted_edges[:5]
