@@ -1,0 +1,211 @@
+[
+  {
+    "community_id": 0,
+    "nodes": [
+      "Component:блок освещения",
+      "Component:контроллер",
+      "ErrorCode:E-15",
+      "ErrorCode:E-19",
+      "ErrorCode:E-24",
+      "Model:AR-220",
+      "Part:P-1022",
+      "Part:P-1050",
+      "Part:P-1122",
+      "Part:P-1150",
+      "Part:P-2022",
+      "Part:P-3022",
+      "Part:P-3122",
+      "Part:P-3126B",
+      "Procedure:SP-106",
+      "Procedure:SP-109",
+      "Procedure:SP-114",
+      "Supplier:АвтоматикаСевер"
+    ],
+    "summary": "18 узлов: 2 Component, 3 ErrorCode, 1 Model, 8 Part, 3 Procedure, 1 Supplier. 23 связи: 3 FIXED_BY, 2 HAS_PART, 3 INDICATES, 7 IS_A, 8 SUPPLIED_BY. Самые тяжёлые связи: 14, 12, 5, 2, 2. Самые связанные узлы: 8, 7, 3, 3, 3."
+  },
+  {
+    "community_id": 1,
+    "nodes": [
+      "Component:вентилятор испарителя",
+      "ErrorCode:E-18",
+      "Model:BZ-110",
+      "Model:BZ-120",
+      "Model:BZ-210",
+      "Model:BZ-220",
+      "Part:P-1046",
+      "Part:P-2046",
+      "Part:P-2118",
+      "Part:P-2122",
+      "Part:P-2146",
+      "Procedure:SP-108",
+      "ProductLine:Бриз"
+    ],
+    "summary": "13 узлов: 1 Component, 1 ErrorCode, 4 Model, 5 Part, 1 Procedure, 1 ProductLine. 21 связь. Связи: BELONGS_TO (4), FAILED (4), HAS_PART (8), INDICATES (1), IS_A (3). Самые тяжёлые: INDICATES (17), FAILED (2). Самые связаны: вентилятор испарителя (8), BZ-210 (5), BZ-220 (5), Бриз (4), BZ-110 (3)."
+  },
+  {
+    "community_id": 2,
+    "nodes": [
+      "Component:вентилятор конденсатора",
+      "ErrorCode:E-13",
+      "Part:P-1014",
+      "Part:P-1046B",
+      "Part:P-1114",
+      "Part:P-2014",
+      "Part:P-2114",
+      "Part:P-3014",
+      "Part:P-3114",
+      "Procedure:SP-103",
+      "Supplier:ВентПром"
+    ],
+    "summary": "11 узлов: 1 Component, 1 ErrorCode, 7 Part, 1 Procedure, 1 Supplier. 15 связей: 1 FIXED_BY, 1 INDICATES, 6 IS_A, 7 SUPPLIED_BY. Суммарный вес связей: 13. Самые тяжёлые связи: 13, 3, 3, 2, 2. Самые связанные узлы: 7, 7, 2, 2, 2."
+  },
+  {
+    "community_id": 3,
+    "nodes": [
+      "Component:датчик температуры",
+      "Component:терморегулирующий вентиль",
+      "ErrorCode:E-14",
+      "ErrorCode:E-21",
+      "Part:P-1018",
+      "Part:P-1118",
+      "Part:P-1118B",
+      "Part:P-2018",
+      "Part:P-2054B",
+      "Part:P-2054C",
+      "Part:P-2058",
+      "Part:P-2158",
+      "Part:P-3018",
+      "Part:P-3058",
+      "Part:P-3118",
+      "Part:P-3158",
+      "Supplier:ТермоПрибор"
+    ],
+    "summary": "17 узлов: 2 Component, 2 ErrorCode, 12 Part, 1 Supplier. 25 связей: 2 INDICATES, 9 IS_A, 2 REPLACED_BY, 12 SUPPLIED_BY. Самые тяжёлые связи: 17, 9, 2, 2, 2. Самые связанные узлы: 12, 6, 5, 3, 2."
+  },
+  {
+    "community_id": 4,
+    "nodes": [
+      "Component:компрессор",
+      "ErrorCode:E-11",
+      "ErrorCode:E-12",
+      "Part:P-1010",
+      "Part:P-1110",
+      "Part:P-2010",
+      "Part:P-2110",
+      "Part:P-2110B",
+      "Part:P-3010",
+      "Part:P-3110",
+      "Supplier:КомпрессорМаш"
+    ],
+    "summary": "11 узлов: 1 Component, 2 ErrorCode, 7 Part, 1 Supplier. 16 связей: 2 INDICATES, 6 IS_A, 1 REPLACED_BY, 7 SUPPLIED_BY. Самые тяжёлые связи: 13, 12, 2, 2, 2. Самые связанные узлы: 8, 7, 3, 2, 2."
+  },
+  {
+    "community_id": 5,
+    "nodes": [
+      "Component:нагреватель оттайки",
+      "ErrorCode:E-20",
+      "Part:P-2054",
+      "Part:P-2154",
+      "Procedure:SP-110"
+    ],
+    "summary": "5 узлов: 1 Component, 1 ErrorCode, 2 Part, 1 Procedure. 4 связи: 1 FIXED_BY, 1 INDICATES, 2 IS_A. Весы: 9, 2, 2, 1. Самые тяжёлые: E-20 INDICATES нагреватель оттайки (вес 9), P-2054 IS_A нагреватель оттайки (вес 2), P-2154 IS_A нагреватель оттайки (вес 2), E-20 FIXED_BY SP-110 (вес 1). Самые связаны: нагреватель оттайки (3), E-20 (2), P-2054 (1), P-2154 (1), SP-110 (1)."
+  },
+  {
+    "community_id": 6,
+    "nodes": [
+      "Component:пусковое реле",
+      "ErrorCode:E-17",
+      "Model:AR-210",
+      "Model:AR-310",
+      "Model:AR-320",
+      "Part:P-1042",
+      "Part:P-1042B",
+      "Part:P-1126",
+      "Part:P-1142",
+      "Part:P-1146",
+      "Procedure:SP-104",
+      "ProductLine:Арктика"
+    ],
+    "summary": "12 узлов: Component 1, ErrorCode 1, Model 3, Part 5, Procedure 1, ProductLine 1. 15 связей: BELONGS_TO 3, FAILED 1, FIXED_BY 1, HAS_PART 6, INDICATES 1, IS_A 2, REPLACED_BY 1. Самые тяжёлые связи: вес 14 (E-17 → пусковое реле), вес 2 (P-1042 → пусковое реле), вес 2 (P-1142 → пусковое реле). Самые связанные узлы: пусковое реле (4), AR-310 (4), AR-320 (4), P-1142 (3), Арктика (3)."
+  },
+  {
+    "community_id": 7,
+    "nodes": [
+      "Component:реле давления",
+      "Component:реле протока",
+      "ErrorCode:E-16",
+      "ErrorCode:E-23",
+      "Part:P-1026",
+      "Part:P-2026",
+      "Part:P-2126",
+      "Part:P-3026",
+      "Part:P-3066",
+      "Part:P-3126",
+      "Part:P-3166",
+      "Procedure:SP-107",
+      "Supplier:ХолодКомплект"
+    ],
+    "summary": "13 узлов: 2 Component, 2 ErrorCode, 7 Part, 1 Procedure, 1 Supplier. 17 связей: 1 FIXED_BY, 2 INDICATES, 7 IS_A, 7 SUPPLIED_BY. Самые тяжёлые связи: 17, 4, 2, 2, 2. Самые связанные узлы: 7, 6, 3, 2, 2."
+  },
+  {
+    "community_id": 8,
+    "nodes": [
+      "Component:циркуляционный насос",
+      "ErrorCode:E-22",
+      "Model:GS-410",
+      "Model:GS-420",
+      "Model:GS-510",
+      "Model:GS-520",
+      "Part:P-3062",
+      "Part:P-3062B",
+      "Part:P-3062C",
+      "Part:P-3162",
+      "Procedure:SP-112",
+      "ProductLine:Гольфстрим",
+      "Supplier:ГидроТех"
+    ],
+    "summary": "13 узлов: 1 Component, 1 ErrorCode, 4 Model, 4 Part, 1 Procedure, 1 ProductLine, 1 Supplier. 17 связей. Связи: BELONGS_TO — 4, FAILED — 4, FIXED_BY — 1, HAS_PART — 1, INDICATES — 1, IS_A — 2, SUPPLIED_BY — 4. Самые тяжёлые: INDICATES — 11, FAILED — 2. Самые связаны: циркуляционный насос — 7, Гольфстрим — 4, ГидроТех — 4, GS-510 — 3, P-3162 — 3."
+  },
+  {
+    "community_id": 9,
+    "nodes": [
+      "Procedure:SP-105"
+    ],
+    "summary": "1 узел. Тип узла: Procedure. Узел SP-105. Связей: 0. Связи по типам: нет. Самые связанные узлы: SP-105 с 0 связями."
+  },
+  {
+    "community_id": 10,
+    "nodes": [
+      "Procedure:SP-111"
+    ],
+    "summary": "1 узел. Тип узла: Procedure. Узел SP-111. Связей: 0. Связи по типам: нет. Самые связанные узлы: SP-111 с 0 связями. Связи: 0. Самые тяжёлые связи: нет."
+  },
+  {
+    "community_id": 11,
+    "nodes": [
+      "Procedure:SP-115"
+    ],
+    "summary": "1 узел. Тип узла: Procedure. Сущность: SP-115. Связей: 0. Связи по типам: нет. Самые связанные узлы: SP-115 с 0 связями."
+  },
+  {
+    "community_id": 12,
+    "nodes": [
+      "Procedure:SP-116"
+    ],
+    "summary": "1 узел. Тип узла: Procedure. Название: SP-116. Связей: 0. Самые связанные узлы: SP-116. Связей: 0. Связи по типам: нет. Самые тяжёлые связи: нет."
+  },
+  {
+    "community_id": 13,
+    "nodes": [
+      "Procedure:SP-117"
+    ],
+    "summary": "1 узел. Тип узла: Procedure. Название: SP-117. Связей: 0. Самые связанные узлы: SP-117. Связей: 0. Связи по типам: нет. Самые тяжёлые связи: нет."
+  },
+  {
+    "community_id": 14,
+    "nodes": [
+      "Procedure:SP-118"
+    ],
+    "summary": "1 узел. Тип узла: Procedure. Сущность: SP-118. Связей: 0. Связи по типам: нет. Самые связанные узлы: SP-118 с 0 связями."
+  }
+]
